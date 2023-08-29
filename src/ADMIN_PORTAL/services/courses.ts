@@ -8,7 +8,7 @@ import CourseModule from "../models/CourseModules";
 
 export const createCourseService = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { courseID, description, title, imgCover } = req.body;
+    const { courseID, description, title, imgcover } = req.body;
 
     const checkCourseExist = await Courses.findOne({ title });
     if (checkCourseExist) {
@@ -23,7 +23,7 @@ export const createCourseService = asyncHandler(
       courseID: generate(6),
       title,
       description,
-      imgCover,
+      imgcover,
     });
     const createdCourse = await course.save();
     return res

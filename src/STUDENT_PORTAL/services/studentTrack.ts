@@ -8,7 +8,7 @@ import { getTrackWithCourses } from "../../ADMIN_PORTAL/services/tracks";
 
 export const enrollTrack = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { studentID, trackID, status, dateEnrolled } = req.body;
+    const { studentID, trackID } = req.params;
 
     let studentTrack;
     // Check if the track exists

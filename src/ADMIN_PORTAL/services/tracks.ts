@@ -82,7 +82,7 @@ export const deleteTrack = asyncHandler(
 
 export const addCourseToTrack = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { courseID, trackID } = req.body;
+    const { courseID, trackID } = req.params;
 
     let newTrackCourse;
     // Check if the track exists

@@ -7,6 +7,7 @@ const courseSchema: Schema<ICourses> = new Schema(
     title: { type: String },
     description: { type: String },
     created: { type: Date },
+    imgcover: { type: String },
   },
   { versionKey: false }
 );

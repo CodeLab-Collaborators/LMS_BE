@@ -5,6 +5,7 @@ dotenv.config();
 export const envVariable = {
   PORT: process.env.PORT!,
   MONGODB_LOCALHOST: process.env.MONGODB_LOCALHOST!,
+  MONGODB_CLOUD: process.env.MONGODB_CLOUD!,
   TOKEN_SECRET: process.env.TOKEN_SECRET!,
   REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET!,
   JWT_EXPIRES: process.env.JWT_EXPIRES!,

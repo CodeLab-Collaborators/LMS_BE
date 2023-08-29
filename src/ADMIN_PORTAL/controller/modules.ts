@@ -12,21 +12,25 @@ export const createModuleController = (
   res: Response,
   next: NextFunction
 ) => createModuleservice(req, res, next);
+
 export const getAllModuleController = (
   req: Request,
   res: Response,
   next: NextFunction
-) => editModule(req, res, next);
+) => getAllModule(req, res, next);
+
 export const getAModuleController = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => getAModule(req, res, next);
+
 export const editModuleController = (
   req: Request,
   res: Response,
   next: NextFunction
-) => getAllModule(req, res, next);
+) => editModule(req, res, next);
+
 export const deleteModuleController = (
   req: Request,
   res: Response,

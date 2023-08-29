@@ -4,7 +4,7 @@ export interface ICourses extends Document {
   courseID: string;
   title: string;
   description: string;
-  imgCover: string;
+  imgcover: string;
   created: Date;
 }
 

@@ -7,7 +7,10 @@ import {
 
 const studentTrackRouter = Router();
 
-studentTrackRouter.post("/studentTrack", enrolledTrackController);
+studentTrackRouter.post(
+  "/studentTrack/:studentID/:trackID",
+  enrolledTrackController
+);
 studentTrackRouter.get(
   "/studentTrack/:studentID/:trackID",
   getTrackWithCoursesController

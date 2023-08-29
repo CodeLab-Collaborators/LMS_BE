@@ -14,6 +14,6 @@ trackRouter.post("/track", createTrackController);
 trackRouter.get("/track", getTracksController);
 trackRouter.patch("/track/:trackID", editTracksController);
 trackRouter.delete("/track/:trackID", deleteTracksController);
-trackRouter.post("/trackCourse", addTrackCourseController);
+trackRouter.post("/track/:trackID/:courseID", addTrackCourseController);
 trackRouter.get("/track/:trackID", getTrackCourseController);
 export default trackRouter;
