@@ -1,9 +1,9 @@
-import express, { Application } from "express";
+import express from "express";
 import { appConfig } from "./app";
 import { dbConfig } from "../config/DB";
 import { envVariable } from "../config/envVariable";
 
-const app: Application = express();
+const app: express.Application = express();
 
 (async () => {
   try {

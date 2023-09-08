@@ -1,0 +1,11 @@
+declare module "*ejs";
+declare module "*nodemailer";
+declare module "*crypto";
+declare module "*jsonwebtoken";
+declare module "*bcrypt";
+declare module "*express";
+declare module "*jwt";
+declare module "morgan";
+declare module "cors";
+declare module "*path";
+declare module "*express-serve-static-core";

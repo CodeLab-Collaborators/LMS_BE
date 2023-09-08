@@ -137,6 +137,29 @@ async function updateTrackCompletionAverage(
   }
 }
 
+async function updateStudentCourseStatus(studentID: string, courseID: string) {
+  // Check if all modules in the studentModule are completed
+  const allModulesCompleted = await StudentModule.find({
+    studentID,
+    courseID,
+    status: { $ne: "completed" },
+  });
+
+  if (allModulesCompleted.length === 0) {
+    // All modules in the studentModule are completed, set StudentCourse status to "completed"
+    await StudentCourse.updateOne(
+      { studentID, courseID },
+      { $set: { status: "completed" } }
+    );
+  } else {
+    // Some modules in the studentModule are still in progress, set StudentCourse status to "in progress"
+    await StudentCourse.updateOne(
+      { studentID, courseID },
+      { $set: { status: "in progress" } }
+    );
+  }
+}
+
 export const completeModule = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { studentID, courseID, moduleID, trackID } = req.params;
@@ -166,36 +189,6 @@ export const completeModule = asyncHandler(
         { $set: { status: "completed" } }
       );
 
-      // Check if all modules in the course are completed
-      const allModulesCompleted = await StudentModule.find({
-        studentID,
-        courseID,
-        status: { $ne: "completed" }, // Check if any module is not completed
-      });
-
-      // Check if all modules in the course are completed
-      const courseModules = await CourseModule.find({ courseID });
-      const completedModuleIDs = allModulesCompleted.map(
-        (module) => module.moduleID
-      );
-      const allCourseModulesCompleted = courseModules.every((module) =>
-        completedModuleIDs.includes(module.moduleID)
-      );
-
-      if (allCourseModulesCompleted) {
-        // All modules in the course are completed, set StudentCourse status to "completed"
-        await StudentCourse.updateOne(
-          { studentID, courseID },
-          { $set: { status: "completed" } }
-        );
-      } else {
-        // Some modules in the course are still in progress, set StudentCourse status to "in progress"
-        await StudentCourse.updateOne(
-          { studentID, courseID },
-          { $set: { status: "in progress" } }
-        );
-      }
-
       // Calculate average completion percentage for the course
       const completedModules = await StudentModule.countDocuments({
         studentID,
@@ -214,6 +207,9 @@ export const completeModule = asyncHandler(
       // Update the StudentTrack completion_average
       await updateTrackCompletionAverage(studentID, trackID);
 
+      // Update the StudentCourse status based on module completion
+      await updateStudentCourseStatus(studentID, courseID);
+
       return res.status(HttpCode.OK).json({
         message: "Module completed successfully",
       });
@@ -227,6 +223,97 @@ export const completeModule = asyncHandler(
     }
   }
 );
+
+// export const completeModule = asyncHandler(
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     const { studentID, courseID, moduleID, trackID } = req.params;
+
+//     try {
+//       // Check if the module was started by the student
+//       const startedModule = await StudentModule.findOne({
+//         studentID,
+//         courseID,
+//         moduleID,
+//       });
+
+//       if (startedModule?.status === "completed") {
+//         return res.status(HttpCode.OK).json({
+//           message: "Module was already completed",
+//         });
+//       }
+//       if (startedModule?.status !== "in progress") {
+//         return res.status(HttpCode.BAD_REQUEST).json({
+//           message: "Module was not started by the student",
+//         });
+//       }
+
+//       // Update StudentModule status to "completed"
+//       await StudentModule.updateOne(
+//         { studentID, courseID, moduleID },
+//         { $set: { status: "completed" } }
+//       );
+
+//       // Check if all modules in the course are completed
+//       const allModulesCompleted = await StudentModule.find({
+//         studentID,
+//         courseID,
+//         status: { $ne: "completed" }, // Check if any module is not completed
+//       });
+
+//       // Check if all modules in the course are completed
+//       const courseModules = await CourseModule.find({ courseID });
+//       const completedModuleIDs = allModulesCompleted.map(
+//         (module) => module.moduleID
+//       );
+//       const allCourseModulesCompleted = courseModules.every((module) =>
+//         completedModuleIDs.includes(module.moduleID)
+//       );
+
+//       if (allCourseModulesCompleted) {
+//         // All modules in the course are completed, set StudentCourse status to "completed"
+//         await StudentCourse.updateOne(
+//           { studentID, courseID },
+//           { $set: { status: "completed" } }
+//         );
+//       } else {
+//         // Some modules in the course are still in progress, set StudentCourse status to "in progress"
+//         await StudentCourse.updateOne(
+//           { studentID, courseID },
+//           { $set: { status: "in progress" } }
+//         );
+//       }
+
+//       // Calculate average completion percentage for the course
+//       const completedModules = await StudentModule.countDocuments({
+//         studentID,
+//         courseID,
+//         status: "completed",
+//       });
+//       const totalModules = await CourseModule.countDocuments({ courseID });
+//       const completionAverage = (completedModules / totalModules) * 100;
+
+//       // Update StudentCourse completion_average
+//       await StudentCourse.updateOne(
+//         { studentID, courseID },
+//         { $set: { completion_average: completionAverage } }
+//       );
+
+//       // Update the StudentTrack completion_average
+//       await updateTrackCompletionAverage(studentID, trackID);
+
+//       return res.status(HttpCode.OK).json({
+//         message: "Module completed successfully",
+//       });
+//     } catch (error) {
+//       next(
+//         new AppError({
+//           message: "Error completing module",
+//           httpCode: HttpCode.INTERNAL_SERVER_ERROR,
+//         })
+//       );
+//     }
+//   }
+// );
 
 // export const completeModule = asyncHandler(
 //   async (req: Request, res: Response, next: NextFunction) => {

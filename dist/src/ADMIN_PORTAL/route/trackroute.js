@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const track_1 = require("../controller/track");
+const trackRouter = (0, express_1.Router)();
+trackRouter.post("/track", track_1.createTrackController);
+trackRouter.get("/track", track_1.getTracksController);
+trackRouter.patch("/track/:trackID", track_1.editTracksController);
+trackRouter.delete("/track/:trackID", track_1.deleteTracksController);
+trackRouter.post("/track/:trackID/:courseID", track_1.addTrackCourseController);
+trackRouter.get("/track/:trackID", track_1.getTrackCourseController);
+exports.default = trackRouter;

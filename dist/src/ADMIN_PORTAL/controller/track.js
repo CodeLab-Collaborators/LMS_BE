@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getTrackCourseController = exports.addTrackCourseController = exports.deleteTracksController = exports.editTracksController = exports.getTracksController = exports.createTrackController = void 0;
+const tracks_1 = require("../services/tracks");
+const createTrackController = (req, res, next) => (0, tracks_1.createTrackService)(req, res, next);
+exports.createTrackController = createTrackController;
+const getTracksController = (req, res, next) => (0, tracks_1.getTracks)(req, res, next);
+exports.getTracksController = getTracksController;
+const editTracksController = (req, res, next) => (0, tracks_1.editTracks)(req, res, next);
+exports.editTracksController = editTracksController;
+const deleteTracksController = (req, res, next) => (0, tracks_1.deleteTrack)(req, res, next);
+exports.deleteTracksController = deleteTracksController;
+const addTrackCourseController = (req, res, next) => (0, tracks_1.addCourseToTrack)(req, res, next);
+exports.addTrackCourseController = addTrackCourseController;
+const getTrackCourseController = (req, res, next) => (0, tracks_1.getOneTrackWithCourses)(req, res, next);
+exports.getTrackCourseController = getTrackCourseController;

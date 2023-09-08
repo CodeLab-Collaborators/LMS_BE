@@ -8,7 +8,7 @@ import TrackCourse from "../models/trackCourse";
 export const createTrackService = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { trackID, trackName, description, price } = req.body;
-    let track;
+    let track: any;
     const checkTrackExist = await Track.findOne({ trackName });
     if (!checkTrackExist) {
       track = new Track({
@@ -84,7 +84,7 @@ export const addCourseToTrack = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { courseID, trackID } = req.params;
 
-    let newTrackCourse;
+    let newTrackCourse: any;
     // Check if the track exists
     const existingTrack = await Track.findOne({ trackID });
 

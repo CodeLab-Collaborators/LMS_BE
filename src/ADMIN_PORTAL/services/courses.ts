@@ -41,7 +41,7 @@ export const getCourses = asyncHandler(
 
 export const editCourses = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { title, description, imgCover } = req.body;
+    const { title, description, imgcover } = req.body;
 
     const course = await Courses.findById(req.params.courseID);
     if (!course) {
@@ -55,7 +55,7 @@ export const editCourses = asyncHandler(
 
     course!.title = title || course!.title;
     course!.description = description || course!.description;
-    course!.imgCover = imgCover || course!.imgCover;
+    course!.imgcover = imgcover || course!.imgcover;
 
     const editCourse = await course!.save({ validateBeforeSave: false });
 
@@ -86,7 +86,7 @@ export const addModulesToCourse = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { courseID, moduleID } = req.params;
 
-    let newCourseModule;
+    let newCourseModule: any;
     // Check if the course exists
     const existingCourse = await Courses.findOne({ courseID });
 

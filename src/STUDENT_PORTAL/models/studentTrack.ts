@@ -8,6 +8,7 @@ const studentTrackSchema: Schema<IStudentTrack> = new Schema(
     status: { type: String },
     completion_average: { type: Number },
     dateEnrolled: { type: String },
+    total_courses: { type: Number },
   },
   { versionKey: false }
 );

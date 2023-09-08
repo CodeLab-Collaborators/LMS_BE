@@ -4,9 +4,6 @@ import { AppError, HttpCode } from "../../utils/AppError";
 import CourseAssessment from "../models/CourseAssessment";
 import Courses from "../models/courses";
 import { generate } from "randomstring";
-// Example usage
-const options = ["Option A", "Option B", "Option C", "Option D"]; // Adjust as needed
-const correctAnswer = "Option B"; // Correct answer should be one of the options
 
 export const createAssessment = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -80,6 +77,7 @@ function createQuestions(
 
   return questions;
 }
+
 export const createQuestionService = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     try {

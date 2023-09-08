@@ -1,6 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import jwt, { Secret, VerifyErrors } from "jsonwebtoken";
-import { IAuthRequest, IStudent } from "../../interface";
+import { IAuthRequest, IStudent } from "../../interface/auth";
 import { asyncHandler } from "../../../utils/globalFunctions";
 import { AppError, HttpCode } from "../../../utils/AppError";
 import { envVariable } from "../../../../config/envVariable";

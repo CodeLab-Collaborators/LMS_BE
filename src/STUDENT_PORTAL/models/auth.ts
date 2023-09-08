@@ -1,6 +1,6 @@
 import { model, Schema, Document } from "mongoose";
 import { IStudent } from "../interface/auth";
-import bcrypt from "bcrypt";
+import * as bcrypt from "bcrypt";
 
 interface IStudenDocument extends Document, IStudent {
   // document level operations

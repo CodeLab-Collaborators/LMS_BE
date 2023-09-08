@@ -10,7 +10,7 @@ export const enrollTrack = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { studentID, trackID } = req.params;
 
-    let studentTrack;
+    let studentTrack: any;
     // Check if the track exists
     const existingStudent = await Student.findOne({ studentID });
     const existingTrack = await Track.findOne({ trackID });
@@ -151,11 +151,16 @@ export const getStudentTrackWithCourses = asyncHandler(
         });
       }
       const totalCoursesInTrack = coursesMappedToTrack.length;
+
+      // Update the studentTrack's total_courses
+      await StudentTrack.updateOne(
+        { studentID, trackID },
+        { $set: { total_courses: totalCoursesInTrack } }
+      );
       return res.status(HttpCode.OK).json({
         message: "Student's track with courses retrieved successfully",
         student,
         track,
-        totalCoursesInTrack,
         coursesMappedToTrack,
       });
     } catch (error) {

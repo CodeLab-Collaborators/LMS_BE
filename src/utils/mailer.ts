@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import { google } from "googleapis";
 import ejs from "ejs";
-import path from "path";
+import * as path from "path";
 import { envVariable } from "../../config/envVariable";
 
 const GOOGLE_SECRET = envVariable.GOOGLE_SECRET;

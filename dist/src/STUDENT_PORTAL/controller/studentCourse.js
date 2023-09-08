@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.completeCourseController = exports.getStudentCourseController = exports.startCourseController = void 0;
+const studentCourse_1 = require("../services/studentCourse");
+const startCourseController = (req, res, next) => (0, studentCourse_1.startCourseService)(req, res, next);
+exports.startCourseController = startCourseController;
+const getStudentCourseController = (req, res, next) => (0, studentCourse_1.getStudentCourseWithModules)(req, res, next);
+exports.getStudentCourseController = getStudentCourseController;
+const completeCourseController = (req, res, next) => (0, studentCourse_1.completeCourse)(req, res, next);
+exports.completeCourseController = completeCourseController;

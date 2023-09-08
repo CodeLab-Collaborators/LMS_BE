@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getStudentProfileController = exports.profileUpdateController = exports.loginController = exports.registerController = void 0;
+const auth_1 = require("../services/auth");
+const registerController = (req, res, next) => (0, auth_1.registerService)(req, res, next);
+exports.registerController = registerController;
+const loginController = (req, res, next) => (0, auth_1.loginService)(req, res, next);
+exports.loginController = loginController;
+const profileUpdateController = (req, res, next) => (0, auth_1.updateStudentProfile)(req, res, next);
+exports.profileUpdateController = profileUpdateController;
+const getStudentProfileController = (req, res, next) => (0, auth_1.getStudentProfileService)(req, res, next);
+exports.getStudentProfileController = getStudentProfileController;

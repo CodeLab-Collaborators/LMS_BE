@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getModuleController = exports.completeModuleController = exports.startModuleController = void 0;
+const studentModule_1 = require("../services/studentModule");
+const startModuleController = (req, res, next) => (0, studentModule_1.startModule)(req, res, next);
+exports.startModuleController = startModuleController;
+const completeModuleController = (req, res, next) => (0, studentModule_1.completeModule)(req, res, next);
+exports.completeModuleController = completeModuleController;
+const getModuleController = (req, res, next) => (0, studentModule_1.getStudentModule)(req, res, next);
+exports.getModuleController = getModuleController;

@@ -6,6 +6,7 @@ export interface IStudentTrack extends Document {
   status: string;
   dateEnrolled: string;
   completion_average: number;
+  total_courses: number;
 }
 
 export interface IStudentCourse extends Document {

@@ -1,6 +1,6 @@
 import { Schema, Document, model } from "mongoose";
-import crypto from "crypto";
-import jwt, { Secret, SignOptions } from "jsonwebtoken";
+import * as crypto from "crypto";
+import * as jwt from "jsonwebtoken";
 
 import { IStudentToken } from "../interface/auth";
 
@@ -9,8 +9,8 @@ export interface IStudentTokenDocument extends Document, IStudentToken {
   generateEmailVerificationToken(): Promise<void>;
   generateToken(
     payload: { studentID: string },
-    secret: Secret,
-    signOptions: SignOptions
+    secret: jwt.Secret,
+    signOptions: jwt.SignOptions
   ): Promise<string>;
 }
 
