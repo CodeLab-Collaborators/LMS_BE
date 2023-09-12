@@ -18,7 +18,7 @@ const envVariable_1 = require("./envVariable");
 function dbConfig() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const conn = yield mongoose_1.default.connect(envVariable_1.envVariable.MONGODB_LOCALHOST);
+            const conn = yield mongoose_1.default.connect(envVariable_1.envVariable.MONGODB_CLOUD);
             console.log(`Connecting to ${conn.connection.host}`);
         }
         catch (error) {
