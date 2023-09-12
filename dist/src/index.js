@@ -21,7 +21,7 @@ const app = (0, express_1.default)();
     try {
         yield (0, DB_1.dbConfig)();
         (0, app_1.appConfig)(app);
-        app.listen(envVariable_1.envVariable.PORT, () => console.log(`server listening on ${envVariable_1.envVariable.PORT}`));
+        app.listen(process.env.PORT || envVariable_1.envVariable.PORT, () => console.log(`server listening on ${envVariable_1.envVariable.PORT}`));
     }
     catch (error) {
         console.log(error);

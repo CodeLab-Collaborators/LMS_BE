@@ -9,7 +9,7 @@ const app: express.Application = express();
   try {
     await dbConfig();
     appConfig(app);
-    app.listen(envVariable.PORT, () =>
+    app.listen(process.env.PORT || envVariable.PORT, () =>
       console.log(`server listening on ${envVariable.PORT}`)
     );
   } catch (error) {
